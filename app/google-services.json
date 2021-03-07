@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "978744167784",
+    "project_id": "catchy-f230e",
+    "storage_bucket": "catchy-f230e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:978744167784:android:468fbf9f311604f65ddadd",
+        "android_client_info": {
+          "package_name": "com.sonmob.catchy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "978744167784-p0jkg3puc356rihvqvmhgamv85i3a16s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sonmob.catchy",
+            "certificate_hash": "26d3de91b4bca7205a5cefa000842e47f32240b2"
+          }
+        },
+        {
+          "client_id": "978744167784-6ms3gjogdphiogfu0cq2rfcvv5tr16lb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqy6iig8TQNAA6ykkF7U6KYgMUGReAJo0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "978744167784-6ms3gjogdphiogfu0cq2rfcvv5tr16lb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
