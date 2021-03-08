@@ -17,6 +17,7 @@
         android:textStyle="bold" />
 
     <LinearLayout
+        android:id="@+id/ll2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
@@ -53,6 +54,15 @@
 
     </LinearLayout>
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/loginBtn"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone"
+        android:layout_below="@+id/ll2"/>
+
     <Button
         android:id="@+id/loginBtn"
         android:layout_width="match_parent"
@@ -61,7 +71,7 @@
         android:layout_marginHorizontal="32dp"
         android:layout_marginBottom="18dp"
         android:background="@drawable/btn_bg"
-        android:text="Sign In"
+        android:text="Login"
         android:textColor="#fff" />
 
     <Button
@@ -72,7 +82,7 @@
         android:layout_marginHorizontal="32dp"
         android:layout_marginBottom="18dp"
         android:background="@drawable/btn_bg"
-        android:text="Google SignIn"
+        android:text="SignIn with google"
         android:textColor="#fff" />
 
     <TextView

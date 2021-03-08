@@ -31,7 +31,6 @@ import java.util.Map;
 
 public class CreateAccountFragment extends Fragment {
 
-
     private EditText nameET;
     private EditText emailET;
     private EditText passwordET;
@@ -41,12 +40,12 @@ public class CreateAccountFragment extends Fragment {
     private ProgressBar progressBar;
     private FirebaseAuth auth;
 
-    public static final String EMAIL_REGEX = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\\\.[A-Z]{2,6}$";
+    public static final String EMAIL_REGEX = "[a-zA-Z0-9._-]+@[a-z]+\\.[a-z]+";
 
+    //
     public CreateAccountFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -85,24 +84,24 @@ public class CreateAccountFragment extends Fragment {
         signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String name = nameET.getText().toString();
-                String email = emailET.getText().toString();
-                String password = passwordET.getText().toString();
-                String confirmPassword = confirmPassET.getText().toString();
+                String name = nameET.getText().toString().trim();
+                String email = emailET.getText().toString().trim();
+                String password = passwordET.getText().toString().trim();
+                String confirmPassword = confirmPassET.getText().toString().trim();
 
-                if (name.isEmpty() || name.equals(" ")){
+                if (name.isEmpty() || name.equals(" ")) {
                     nameET.setError("Please input valid name");
                     return;
                 }
-                if (email.isEmpty() || !email.matches(EMAIL_REGEX)){
+                if (email.isEmpty() || !email.matches(EMAIL_REGEX)) {
                     emailET.setError("Please input valid email");
                     return;
                 }
-                if (password.isEmpty() || password.length() < 6 ){
+                if (password.isEmpty() || password.length() < 6) {
                     passwordET.setError("Please input valid password");
                     return;
                 }
-                if (!password.equals(confirmPassword) ){
+                if (!password.equals(confirmPassword)) {
                     confirmPassET.setError("Password not match");
                     return;
                 }
@@ -118,15 +117,24 @@ public class CreateAccountFragment extends Fragment {
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()){
+                        if (task.isSuccessful()) {
 
                             FirebaseUser user = auth.getCurrentUser();
-
+                            assert user != null;
+                            user.sendEmailVerification()
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                Toast.makeText(getActivity(), "Email verification link send", Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
+                                    });
                             uploadUser(user, name, email);
-                        }else {
+                        } else {
                             progressBar.setVisibility(View.GONE);
                             String exception = task.getException().getMessage();
-                            Toast.makeText(getActivity(), "Error: "+exception, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "Error: " + exception, Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -145,14 +153,14 @@ public class CreateAccountFragment extends Fragment {
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()){
+                        if (task.isSuccessful()) {
                             assert getActivity() != null;
                             progressBar.setVisibility(View.GONE);
                             startActivity(new Intent(getActivity().getApplicationContext(), MainActivity.class));
                             getActivity().finish();
-                        }else {
+                        } else {
                             progressBar.setVisibility(View.GONE);
-                            Toast.makeText(getActivity(), "Error: "+task.getException(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "Error: " + task.getException(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
